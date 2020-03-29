@@ -1,4 +1,5 @@
 #include "GamePlay.hpp"
+#include "GameOver.hpp"
 
 #include <SFML/Window/Event.hpp>
 
@@ -97,8 +98,7 @@ void GamePlay::Update(sf::Time deltaTime)
         {
             if (m_snake.IsOn(wall))
             {
-                // Todo:
-                // Go to GameOver State
+                m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
                 break;
             }
         }
