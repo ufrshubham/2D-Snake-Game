@@ -23,6 +23,7 @@ public:
     void Move(const sf::Vector2f &direction);
     bool IsOn(const sf::Sprite &other) const;
     void Grow(const sf::Vector2f &direction);
+    bool IsSelfIntersecting() const;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
