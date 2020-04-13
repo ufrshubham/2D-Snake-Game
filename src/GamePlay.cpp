@@ -9,9 +9,9 @@
 
 GamePlay::GamePlay(std::shared_ptr<Context> &context)
     : m_context(context),
+      m_score(0),
       m_snakeDirection({16.f, 0.f}),
-      m_elapsedTime(sf::Time::Zero),
-      m_score(0)
+      m_elapsedTime(sf::Time::Zero)
 {
     srand(time(nullptr));
 }
@@ -35,12 +35,12 @@ void GamePlay::Init()
         wall.setTexture(m_context->m_assets->GetTexture(WALL));
     }
 
-    m_walls[0].setTextureRect({0, 0, m_context->m_window->getSize().x, 16});
-    m_walls[1].setTextureRect({0, 0, m_context->m_window->getSize().x, 16});
+    m_walls[0].setTextureRect({0, 0, (int)m_context->m_window->getSize().x, 16});
+    m_walls[1].setTextureRect({0, 0, (int)m_context->m_window->getSize().x, 16});
     m_walls[1].setPosition(0, m_context->m_window->getSize().y - 16);
 
-    m_walls[2].setTextureRect({0, 0, 16, m_context->m_window->getSize().y});
-    m_walls[3].setTextureRect({0, 0, 16, m_context->m_window->getSize().y});
+    m_walls[2].setTextureRect({0, 0, 16, (int)m_context->m_window->getSize().y});
+    m_walls[3].setTextureRect({0, 0, 16, (int)m_context->m_window->getSize().y});
     m_walls[3].setPosition(m_context->m_window->getSize().x - 16, 0);
 
     m_food.setTexture(m_context->m_assets->GetTexture(FOOD));
