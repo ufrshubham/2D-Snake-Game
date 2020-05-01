@@ -4,6 +4,9 @@
 
 ---
 
+### What it looks like?
+![](Demo.gif)
+
 ### This game has multiple states
 - Main Menu State - Displays main menu
 - Game Play State - The actual game play
