@@ -3,8 +3,13 @@
 #include "Game.hpp"
 #include "MainMenu.hpp"
 
+#include <filesystem>
+
 Game::Game() : m_context(std::make_shared<Context>())
 {
+    ModifyCurrentWorkingDirectory();
+
+    auto cwd = std::filesystem::current_path();
     m_context->m_window->create(sf::VideoMode(640, 352), "Snake Game", sf::Style::Close);
     m_context->m_states->Add(std::make_unique<MainMenu>(m_context));
 }
@@ -34,5 +39,13 @@ void Game::Run()
             m_context->m_states->GetCurrent()->Update(TIME_PER_FRAME);
             m_context->m_states->GetCurrent()->Draw();
         }
+    }
+}
+
+void Game::ModifyCurrentWorkingDirectory() const
+{
+    while (!std::filesystem::exists("assets"))
+    {
+        std::filesystem::current_path(std::filesystem::current_path().parent_path());
     }
 }

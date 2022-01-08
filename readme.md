@@ -5,15 +5,18 @@
 ---
 
 ### What it looks like?
-![](Demo.gif)
+
+![Demo](Demo.gif)
 
 ### This game has multiple states
+
 - Main Menu State - Displays main menu
 - Game Play State - The actual game play
 - Pause Game State - Pause screen
 - Game Over State - Displays game over screen
 
 ### Features
+
 - Snake can be controlled with arrow keys
 - Snake automatically advances 16px
 - Food gets randomly placed
@@ -21,8 +24,39 @@
 - Each food increase player score by 1 point
 
 ### Build Instructions
+
 - Requirements
-    - C++ compiler
-    - Make
-    - SFML lib
-- Just run make command to generate the executable
+  - Git
+  - CMake
+  - C++ Compiler
+
+- Steps
+
+    ```bash
+    # Clone this project
+    $ git clone https://github.com/ufrshubham/2D-Snake-Game
+
+    # Go to project root
+    $ cd 2D-Snake-Game
+
+    # Checkout cmake-build branch
+    $ git checkout cmake-bulid
+
+    # Pull SFML as submodule
+    $ git submodule update --init
+
+    # Create a folder for build
+    $ mkdir build
+
+    # Go to build folder
+    $ cd build
+
+    # Generate project files
+    $ cmake ..
+    ```
+
+- This will generate project files using default cmake generator for your platform. For example:
+
+  - on `Windows` with `Visual Studio` installed, it will generate a `.sln`
+  - on `Linux` with `make` installed, it will generate a `Makefile`
+  - on `Mac` with `xcode` installed, it will generate a `.xcodeproj`
