@@ -31,4 +31,4 @@ target_include_directories(
 )
 
 # Link required libraries (add sfml-audio and sfml-network if needed)
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system sfml-audio)
