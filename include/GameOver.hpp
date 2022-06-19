@@ -3,6 +3,7 @@
 #include <memory>
 
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Audio/Sound.hpp>
 
 #include "State.hpp"
 #include "Game.hpp"
@@ -21,6 +22,8 @@ private:
     bool m_isExitButtonSelected;
     bool m_isExitButtonPressed;
 
+    sf::Sound m_deathSfx;
+
 public:
     GameOver(std::shared_ptr<Context> &context);
     ~GameOver();
@@ -29,4 +32,6 @@ public:
     void ProcessInput() override;
     void Update(sf::Time deltaTime) override;
     void Draw() override;
+
+    void Start() override;
 };

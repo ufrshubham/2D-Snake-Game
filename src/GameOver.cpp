@@ -41,6 +41,8 @@ void GameOver::Init()
     m_exitButton.setPosition(m_context->m_window->getSize().x / 2,
                              m_context->m_window->getSize().y / 2 + 25.f);
     m_exitButton.setCharacterSize(20);
+
+    m_deathSfx.setBuffer(m_context->m_assets->GetSoundEffect(DEATH_SFX));
 }
 
 void GameOver::ProcessInput()
@@ -129,4 +131,9 @@ void GameOver::Draw()
     m_context->m_window->draw(m_retryButton);
     m_context->m_window->draw(m_exitButton);
     m_context->m_window->display();
+}
+
+void GameOver::Start()
+{
+    m_deathSfx.play();
 }
