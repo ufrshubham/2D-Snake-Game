@@ -60,3 +60,13 @@
   - on `Windows` with `Visual Studio` installed, it will generate a `.sln`
   - on `Linux` with `make` installed, it will generate a `Makefile`
   - on `Mac` with `xcode` installed, it will generate a `.xcodeproj`
+
+### Audio assets
+
+None of the audio assets are made by me. Here are links to their original source and authors:
+
+- [Spinning out.ogg](https://joshuuu.itch.io/short-loopable-background-music) by [joshuuu](https://joshuuu.itch.io/)
+
+- [Death 002.wav](https://edwardcufaude.itch.io/soundfxpack1) by [edwardcufaude](https://edwardcufaude.itch.io/)
+
+- [Simple Coin 006.wav](https://edwardcufaude.itch.io/soundfxpack1) by [edwardcufaude](https://edwardcufaude.itch.io/)
