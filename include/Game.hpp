@@ -13,7 +13,10 @@ enum AssetID
     GRASS,
     FOOD,
     WALL,
-    SNAKE
+    SNAKE,
+    MAIN_SOUND_TRACK,
+    COIN_SFX,
+    DEATH_SFX,
 };
 
 struct Context
