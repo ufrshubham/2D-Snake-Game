@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Audio/Sound.hpp>
 
 #include "Game.hpp"
 #include "State.hpp"
@@ -26,6 +27,9 @@ private:
     sf::Time m_elapsedTime;
 
     bool m_isPaused;
+
+    sf::Music &m_bgm;
+    sf::Sound m_foodEatSfx;
 
 public:
     GamePlay(std::shared_ptr<Context> &context);

@@ -12,7 +12,8 @@ GamePlay::GamePlay(std::shared_ptr<Context> &context)
       m_score(0),
       m_snakeDirection({16.f, 0.f}),
       m_elapsedTime(sf::Time::Zero),
-      m_isPaused(false)
+      m_isPaused(false),
+      m_bgm(m_context->m_assets->GetSoundTrack(MAIN_SOUND_TRACK))
 {
     srand(time(nullptr));
 }
@@ -52,6 +53,8 @@ void GamePlay::Init()
     m_scoreText.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_scoreText.setString("Score : " + std::to_string(m_score));
     m_scoreText.setCharacterSize(15);
+
+    m_foodEatSfx.setBuffer(m_context->m_assets->GetSoundEffect(COIN_SFX));
 }
 
 void GamePlay::ProcessInput()
@@ -99,7 +102,7 @@ void GamePlay::ProcessInput()
 
 void GamePlay::Update(sf::Time deltaTime)
 {
-    if(!m_isPaused)
+    if (!m_isPaused)
     {
         m_elapsedTime += deltaTime;
 
@@ -109,6 +112,7 @@ void GamePlay::Update(sf::Time deltaTime)
             {
                 if (m_snake.IsOn(wall))
                 {
+                    m_bgm.stop();
                     m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
                     break;
                 }
@@ -117,8 +121,10 @@ void GamePlay::Update(sf::Time deltaTime)
             if (m_snake.IsOn(m_food))
             {
                 m_snake.Grow(m_snakeDirection);
+                m_foodEatSfx.play();
 
-                int x = 0, y = 0;
+                int x = 0,
+                    y = 0;
                 x = std::clamp<int>(rand() % m_context->m_window->getSize().x, 16, m_context->m_window->getSize().x - 2 * 16);
                 y = std::clamp<int>(rand() % m_context->m_window->getSize().y, 16, m_context->m_window->getSize().y - 2 * 16);
 
@@ -133,6 +139,7 @@ void GamePlay::Update(sf::Time deltaTime)
 
             if (m_snake.IsSelfIntersecting())
             {
+                m_bgm.stop();
                 m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
             }
 
@@ -160,9 +167,11 @@ void GamePlay::Draw()
 void GamePlay::Pause()
 {
     m_isPaused = true;
+    m_bgm.pause();
 }
 
 void GamePlay::Start()
 {
     m_isPaused = false;
+    m_bgm.play();
 }
