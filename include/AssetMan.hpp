@@ -6,23 +6,31 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 namespace Engine
 {
-class AssetMan
-{
-private:
-    std::map<int, std::unique_ptr<sf::Texture>> m_textures;
-    std::map<int, std::unique_ptr<sf::Font>> m_fonts;
+    class AssetMan
+    {
+    private:
+        std::map<int, std::unique_ptr<sf::Texture>> m_textures;
+        std::map<int, std::unique_ptr<sf::Font>> m_fonts;
+        std::map<int, std::unique_ptr<sf::Music>> m_soundTracks;
+        std::map<int, std::unique_ptr<sf::SoundBuffer>> m_soundEffects;
 
-public:
-    AssetMan();
-    ~AssetMan();
+    public:
+        AssetMan();
+        ~AssetMan();
 
-    void AddTexture(int id, const std::string &filePath, bool wantRepeated = false);
-    void AddFont(int id, const std::string &filePath);
+        void AddTexture(int id, const std::string &filePath, bool wantRepeated = false);
+        void AddFont(int id, const std::string &filePath);
+        void AddSoundTrack(int id, const std::string &filePath, bool wantLooping = false);
+        void AddSoundEffect(int id, const std::string &filePath);
 
-    const sf::Texture &GetTexture(int id) const;
-    const sf::Font &GetFont(int id) const;
-};
+        const sf::Texture &GetTexture(int id) const;
+        const sf::Font &GetFont(int id) const;
+        sf::Music &GetSoundTrack(int id);
+        const sf::SoundBuffer &GetSoundEffect(int id) const;
+    };
 } // namespace Engine
