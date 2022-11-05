@@ -101,7 +101,7 @@ void GameOver::ProcessInput()
     }
 }
 
-void GameOver::Update(sf::Time deltaTime)
+void GameOver::Update(const sf::Time& deltaTime)
 {
     if (m_isRetryButtonSelected)
     {
@@ -124,7 +124,7 @@ void GameOver::Update(sf::Time deltaTime)
     }
 }
 
-void GameOver::Draw()
+void GameOver::Draw() const
 {
     m_context->m_window->clear(sf::Color::Blue);
     m_context->m_window->draw(m_gameOverTitle);

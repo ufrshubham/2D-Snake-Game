@@ -49,11 +49,11 @@ void PauseGame::ProcessInput()
     }
 }
 
-void PauseGame::Update(sf::Time deltaTime)
+void PauseGame::Update(const sf::Time& deltaTime)
 {
 }
 
-void PauseGame::Draw()
+void PauseGame::Draw() const
 {
     m_context->m_window->draw(m_pauseTitle);
     m_context->m_window->display();

@@ -100,7 +100,7 @@ void GamePlay::ProcessInput()
     }
 }
 
-void GamePlay::Update(sf::Time deltaTime)
+void GamePlay::Update(const sf::Time& deltaTime)
 {
     if (!m_isPaused)
     {
@@ -148,7 +148,7 @@ void GamePlay::Update(sf::Time deltaTime)
     }
 }
 
-void GamePlay::Draw()
+void GamePlay::Draw() const
 {
     m_context->m_window->clear();
     m_context->m_window->draw(m_grass);

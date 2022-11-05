@@ -101,7 +101,7 @@ void MainMenu::ProcessInput()
     }
 }
 
-void MainMenu::Update(sf::Time deltaTime)
+void MainMenu::Update(const sf::Time& deltaTime)
 {
     if(m_isPlayButtonSelected)
     {
@@ -125,7 +125,7 @@ void MainMenu::Update(sf::Time deltaTime)
     
 }
 
-void MainMenu::Draw()
+void MainMenu::Draw() const
 {
     m_context->m_window->clear(sf::Color::Blue);
     m_context->m_window->draw(m_gameTitle);

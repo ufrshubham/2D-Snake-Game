@@ -19,6 +19,6 @@ public:
 
     void Init() override;
     void ProcessInput() override;
-    void Update(sf::Time deltaTime) override;
-    void Draw() override;
+    void Update(const sf::Time& deltaTime) override;
+    void Draw() const override;
 };
