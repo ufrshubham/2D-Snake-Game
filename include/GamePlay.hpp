@@ -24,6 +24,7 @@ private:
     int m_score;
 
     sf::Vector2f m_snakeDirection;
+    sf::Vector2f m_newSnakeDirection;
     sf::Time m_elapsedTime;
 
     bool m_isPaused;

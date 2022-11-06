@@ -11,6 +11,7 @@ GamePlay::GamePlay(std::shared_ptr<Context> &context)
     : m_context(context),
       m_score(0),
       m_snakeDirection({16.f, 0.f}),
+      m_newSnakeDirection({16.f, 0.f}),
       m_elapsedTime(sf::Time::Zero),
       m_isPaused(false),
       m_bgm(m_context->m_assets->GetSoundTrack(MAIN_SOUND_TRACK))
@@ -68,20 +69,20 @@ void GamePlay::ProcessInput()
         }
         else if (event.type == sf::Event::KeyPressed)
         {
-            sf::Vector2f newDirection = m_snakeDirection;
+            m_newSnakeDirection = m_snakeDirection;
             switch (event.key.code)
             {
             case sf::Keyboard::Up:
-                newDirection = {0.f, -16.f};
+                m_newSnakeDirection = {0.f, -16.f};
                 break;
             case sf::Keyboard::Down:
-                newDirection = {0.f, 16.f};
+                m_newSnakeDirection = {0.f, 16.f};
                 break;
             case sf::Keyboard::Left:
-                newDirection = {-16.f, 0.f};
+                m_newSnakeDirection = {-16.f, 0.f};
                 break;
             case sf::Keyboard::Right:
-                newDirection = {16.f, 0.f};
+                m_newSnakeDirection = {16.f, 0.f};
                 break;
             case sf::Keyboard::Escape:
                 m_context->m_states->Add(std::make_unique<PauseGame>(m_context));
@@ -89,12 +90,6 @@ void GamePlay::ProcessInput()
 
             default:
                 break;
-            }
-
-            if (std::abs(m_snakeDirection.x) != std::abs(newDirection.x) ||
-                std::abs(m_snakeDirection.y) != std::abs(newDirection.y))
-            {
-                m_snakeDirection = newDirection;
             }
         }
     }
@@ -108,6 +103,12 @@ void GamePlay::Update(const sf::Time& deltaTime)
 
         if (m_elapsedTime.asSeconds() > 0.1)
         {
+            if (std::abs(m_snakeDirection.x) != std::abs(m_newSnakeDirection.x) ||
+                std::abs(m_snakeDirection.y) != std::abs(m_newSnakeDirection.y))
+            {
+                m_snakeDirection = m_newSnakeDirection;
+            }
+
             for (auto &wall : m_walls)
             {
                 if (m_snake.IsOn(wall))
