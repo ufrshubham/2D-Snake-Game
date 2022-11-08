@@ -99,7 +99,7 @@ void GameOver::ProcessInput()
     }
 }
 
-void GameOver::Update(sf::Time deltaTime)
+void GameOver::Update(const sf::Time& deltaTime)
 {
     if (m_isRetryButtonSelected)
     {

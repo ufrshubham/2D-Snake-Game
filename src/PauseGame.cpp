@@ -49,7 +49,7 @@ void PauseGame::ProcessInput()
     }
 }
 
-void PauseGame::Update(sf::Time deltaTime)
+void PauseGame::Update(const sf::Time& deltaTime)
 {
 }
 

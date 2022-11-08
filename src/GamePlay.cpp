@@ -97,7 +97,7 @@ void GamePlay::ProcessInput()
     }
 }
 
-void GamePlay::Update(sf::Time deltaTime)
+void GamePlay::Update(const sf::Time& deltaTime)
 {
     if (!m_isPaused)
     {
