@@ -103,7 +103,7 @@ void MainMenu::ProcessInput()
 
 void MainMenu::Update(sf::Time deltaTime)
 {
-    if(m_isPlayButtonSelected)
+    if (m_isPlayButtonSelected)
     {
         m_playButton.setFillColor(sf::Color::Black);
         m_exitButton.setFillColor(sf::Color::White);
@@ -113,16 +113,15 @@ void MainMenu::Update(sf::Time deltaTime)
         m_exitButton.setFillColor(sf::Color::Black);
         m_playButton.setFillColor(sf::Color::White);
     }
-    
-    if(m_isPlayButtonPressed)
+
+    if (m_isPlayButtonPressed)
     {
         m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
     }
-    else if(m_isExitButtonPressed)
+    else if (m_isExitButtonPressed)
     {
         m_context->m_window->close();
     }
-    
 }
 
 void MainMenu::Draw()

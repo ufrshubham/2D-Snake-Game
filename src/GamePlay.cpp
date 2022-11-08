@@ -99,7 +99,7 @@ void GamePlay::ProcessInput()
 
 void GamePlay::Update(sf::Time deltaTime)
 {
-    if(!m_isPaused)
+    if (!m_isPaused)
     {
         m_elapsedTime += deltaTime;
 

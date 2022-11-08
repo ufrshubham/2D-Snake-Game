@@ -18,5 +18,4 @@ namespace Engine
         virtual void Pause(){};
         virtual void Start(){};
     };
-    
-} // namespace Engine
+}

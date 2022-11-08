@@ -7,24 +7,24 @@
 
 namespace Engine
 {
-class StateMan
-{
-private:
-    std::stack<std::unique_ptr<State>> m_stateStack;
-    std::unique_ptr<State> m_newState;
+    class StateMan
+    {
+    public:
+        StateMan();
+        ~StateMan();
 
-    bool m_add;
-    bool m_replace;
-    bool m_remove;
+        void Add(std::unique_ptr<State> toAdd, bool replace = false);
+        void PopCurrent();
+        void ProcessStateChange();
+        std::unique_ptr<State> &GetCurrent();
 
-public:
-    StateMan();
-    ~StateMan();
+    private:
+        std::stack<std::unique_ptr<State>> m_stateStack;
+        std::unique_ptr<State> m_newState;
 
-    void Add(std::unique_ptr<State> toAdd, bool replace = false);
-    void PopCurrent();
-    void ProcessStateChange();
-    std::unique_ptr<State>& GetCurrent();
-};
+        bool m_add;
+        bool m_replace;
+        bool m_remove;
+    };
 
-} // namespace Engine
+}

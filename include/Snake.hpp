@@ -10,11 +10,6 @@
 
 class Snake : public sf::Drawable
 {
-private:
-    std::list<sf::Sprite> m_body;
-    std::list<sf::Sprite>::iterator m_head;
-    std::list<sf::Sprite>::iterator m_tail;
-
 public:
     Snake();
     ~Snake();
@@ -26,4 +21,9 @@ public:
     bool IsSelfIntersecting() const;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+private:
+    std::list<sf::Sprite> m_body;
+    std::list<sf::Sprite>::iterator m_head;
+    std::list<sf::Sprite>::iterator m_tail;
 };
