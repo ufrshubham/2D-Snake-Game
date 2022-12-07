@@ -4,9 +4,7 @@
 #include <SFML/Window/Event.hpp>
 
 GameOver::GameOver(std::shared_ptr<Context> &context)
-    : m_context(context), m_isRetryButtonSelected(true),
-      m_isRetryButtonPressed(false), m_isExitButtonSelected(false),
-      m_isExitButtonPressed(false)
+    : m_context(context), m_option(Option::Retry)
 {
 }
 
@@ -60,34 +58,25 @@ void GameOver::ProcessInput()
             {
             case sf::Keyboard::Up:
             {
-                if (!m_isRetryButtonSelected)
-                {
-                    m_isRetryButtonSelected = true;
-                    m_isExitButtonSelected = false;
-                }
+                m_option = (Option)(std::clamp(m_option - 1, 0, (int)Option::Count - 1));
                 break;
             }
             case sf::Keyboard::Down:
             {
-                if (!m_isExitButtonSelected)
-                {
-                    m_isRetryButtonSelected = false;
-                    m_isExitButtonSelected = true;
-                }
+                m_option = (Option)(std::clamp(m_option + 1, 0, (int)Option::Count - 1));
                 break;
             }
             case sf::Keyboard::Return:
             {
-                m_isRetryButtonPressed = false;
-                m_isExitButtonPressed = false;
+                switch (m_option)
+                {
+                case Option::Retry:
+                    m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
+                    break;
 
-                if (m_isRetryButtonSelected)
-                {
-                    m_isRetryButtonPressed = true;
-                }
-                else
-                {
-                    m_isExitButtonPressed = true;
+                case Option::Exit:
+                    m_context->m_window->close();
+                    break;
                 }
 
                 break;
@@ -101,26 +90,19 @@ void GameOver::ProcessInput()
     }
 }
 
-void GameOver::Update(const sf::Time& deltaTime)
+void GameOver::Update(const sf::Time &deltaTime)
 {
-    if (m_isRetryButtonSelected)
+    switch (m_option)
     {
+    case Option::Retry:
         m_retryButton.setFillColor(sf::Color::Black);
         m_exitButton.setFillColor(sf::Color::White);
-    }
-    else
-    {
+        break;
+
+    case Option::Exit:
         m_exitButton.setFillColor(sf::Color::Black);
         m_retryButton.setFillColor(sf::Color::White);
-    }
-
-    if (m_isRetryButtonPressed)
-    {
-        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
-    }
-    else if (m_isExitButtonPressed)
-    {
-        m_context->m_window->close();
+        break;
     }
 }
 

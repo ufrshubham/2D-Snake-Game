@@ -11,16 +11,19 @@
 class GameOver : public Engine::State
 {
 private:
+    enum Option
+    {
+        Retry,
+        Exit,
+        Count
+    };
+
     std::shared_ptr<Context> m_context;
     sf::Text m_gameOverTitle;
     sf::Text m_retryButton;
     sf::Text m_exitButton;
 
-    bool m_isRetryButtonSelected;
-    bool m_isRetryButtonPressed;
-
-    bool m_isExitButtonSelected;
-    bool m_isExitButtonPressed;
+    Option m_option;
 
     sf::Sound m_deathSfx;
 
@@ -30,7 +33,7 @@ public:
 
     void Init() override;
     void ProcessInput() override;
-    void Update(const sf::Time& deltaTime) override;
+    void Update(const sf::Time &deltaTime) override;
     void Draw() const override;
 
     void Start() override;

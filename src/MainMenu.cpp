@@ -4,9 +4,7 @@
 #include <SFML/Window/Event.hpp>
 
 MainMenu::MainMenu(std::shared_ptr<Context> &context)
-    : m_context(context), m_isPlayButtonSelected(true),
-      m_isPlayButtonPressed(false), m_isExitButtonSelected(false),
-      m_isExitButtonPressed(false)
+    : m_context(context), m_option(Option::Play)
 {
 }
 
@@ -60,34 +58,25 @@ void MainMenu::ProcessInput()
             {
             case sf::Keyboard::Up:
             {
-                if (!m_isPlayButtonSelected)
-                {
-                    m_isPlayButtonSelected = true;
-                    m_isExitButtonSelected = false;
-                }
+                m_option = (Option)(std::clamp(m_option - 1, 0, (int)Option::Count - 1));
                 break;
             }
             case sf::Keyboard::Down:
             {
-                if (!m_isExitButtonSelected)
-                {
-                    m_isPlayButtonSelected = false;
-                    m_isExitButtonSelected = true;
-                }
+                m_option = (Option)(std::clamp(m_option + 1, 0, (int)Option::Count - 1));
                 break;
             }
             case sf::Keyboard::Return:
             {
-                m_isPlayButtonPressed = false;
-                m_isExitButtonPressed = false;
+                switch (m_option)
+                {
+                case Option::Play:
+                    m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
+                    break;
 
-                if (m_isPlayButtonSelected)
-                {
-                    m_isPlayButtonPressed = true;
-                }
-                else
-                {
-                    m_isExitButtonPressed = true;
+                case Option::Exit:
+                    m_context->m_window->close();
+                    break;
                 }
 
                 break;
@@ -101,28 +90,20 @@ void MainMenu::ProcessInput()
     }
 }
 
-void MainMenu::Update(const sf::Time& deltaTime)
+void MainMenu::Update(const sf::Time &deltaTime)
 {
-    if(m_isPlayButtonSelected)
+    switch (m_option)
     {
+    case Option::Play:
         m_playButton.setFillColor(sf::Color::Black);
         m_exitButton.setFillColor(sf::Color::White);
-    }
-    else
-    {
+        break;
+
+    case Option::Exit:
         m_exitButton.setFillColor(sf::Color::Black);
         m_playButton.setFillColor(sf::Color::White);
+        break;
     }
-    
-    if(m_isPlayButtonPressed)
-    {
-        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
-    }
-    else if(m_isExitButtonPressed)
-    {
-        m_context->m_window->close();
-    }
-    
 }
 
 void MainMenu::Draw() const
