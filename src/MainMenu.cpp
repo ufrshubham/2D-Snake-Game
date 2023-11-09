@@ -2,8 +2,9 @@
 #include "GamePlay.hpp"
 
 #include <SFML/Window/Event.hpp>
+#include <iostream>
 
-MainMenu::MainMenu(std::shared_ptr<Context> &context)
+MainMenu::MainMenu(std::shared_ptr<Context>& context)
     : m_context(context), m_option(Option::Play)
 {
 }
@@ -20,26 +21,26 @@ void MainMenu::Init()
     m_gameTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameTitle.setString("Snake Game");
     m_gameTitle.setOrigin(m_gameTitle.getLocalBounds().width / 2,
-                          m_gameTitle.getLocalBounds().height / 2);
+        m_gameTitle.getLocalBounds().height / 2);
     m_gameTitle.setPosition(m_context->m_window->getSize().x / 2,
-                            m_context->m_window->getSize().y / 2 - 150.f);
+        m_context->m_window->getSize().y / 2 - 150.f);
 
     // Play Button
     m_playButton.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_playButton.setString("Play");
     m_playButton.setOrigin(m_playButton.getLocalBounds().width / 2,
-                           m_playButton.getLocalBounds().height / 2);
+        m_playButton.getLocalBounds().height / 2);
     m_playButton.setPosition(m_context->m_window->getSize().x / 2,
-                             m_context->m_window->getSize().y / 2 - 25.f);
+        m_context->m_window->getSize().y / 2 - 25.f);
     m_playButton.setCharacterSize(20);
 
     // Exit Button
     m_exitButton.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_exitButton.setString("Exit");
     m_exitButton.setOrigin(m_exitButton.getLocalBounds().width / 2,
-                           m_exitButton.getLocalBounds().height / 2);
+        m_exitButton.getLocalBounds().height / 2);
     m_exitButton.setPosition(m_context->m_window->getSize().x / 2,
-                             m_context->m_window->getSize().y / 2 + 25.f);
+        m_context->m_window->getSize().y / 2 + 25.f);
     m_exitButton.setCharacterSize(20);
 }
 
@@ -75,7 +76,7 @@ void MainMenu::ProcessInput()
                     break;
 
                 case Option::Exit:
-                    m_context->m_window->close();
+                    m_context->m_states->PopAll();
                     break;
                 }
 
@@ -90,7 +91,7 @@ void MainMenu::ProcessInput()
     }
 }
 
-void MainMenu::Update(const sf::Time &deltaTime)
+void MainMenu::Update(const sf::Time& deltaTime)
 {
     switch (m_option)
     {

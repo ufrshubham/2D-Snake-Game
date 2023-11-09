@@ -38,9 +38,17 @@ void Game::Run()
             timeSinceLastFrame -= TIME_PER_FRAME;
 
             m_context->m_states->ProcessStateChange();
-            m_context->m_states->GetCurrent()->ProcessInput();
-            m_context->m_states->GetCurrent()->Update(TIME_PER_FRAME);
-            m_context->m_states->GetCurrent()->Draw();
+
+            if (!m_context->m_states->IsEmpty())
+            {
+                m_context->m_states->GetCurrent()->ProcessInput();
+                m_context->m_states->GetCurrent()->Update(TIME_PER_FRAME);
+                m_context->m_states->GetCurrent()->Draw();
+            }
+            else
+            {
+                m_context->m_window->close();
+            }
         }
     }
 }

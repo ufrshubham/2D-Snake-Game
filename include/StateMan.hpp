@@ -16,6 +16,7 @@ private:
     bool m_add;
     bool m_replace;
     bool m_remove;
+    bool m_removeAll;
 
 public:
     StateMan();
@@ -23,8 +24,11 @@ public:
 
     void Add(std::unique_ptr<State> toAdd, bool replace = false);
     void PopCurrent();
+    void PopAll();
     void ProcessStateChange();
     std::unique_ptr<State>& GetCurrent();
+
+    bool IsEmpty() const;
 };
 
 } // namespace Engine

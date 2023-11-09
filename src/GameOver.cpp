@@ -75,7 +75,7 @@ void GameOver::ProcessInput()
                     break;
 
                 case Option::Exit:
-                    m_context->m_window->close();
+                    m_context->m_states->PopAll();
                     break;
                 }
 
