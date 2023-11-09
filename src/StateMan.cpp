@@ -1,6 +1,6 @@
 #include "StateMan.hpp"
 
-Engine::StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false)
+Engine::StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false), m_removeAll(false)
 {
 }
 
@@ -21,9 +21,23 @@ void Engine::StateMan::PopCurrent()
     m_remove = true;
 }
 
+void Engine::StateMan::PopAll()
+{
+    m_removeAll = true;
+    m_remove = false;
+}
+
 void Engine::StateMan::ProcessStateChange()
 {
-    if (m_remove && (!m_stateStack.empty()))
+    if (m_removeAll)
+    {
+        while (!m_stateStack.empty())
+        {
+            m_stateStack.pop();
+        }
+        m_removeAll = false;
+    }
+    else if (m_remove && (!m_stateStack.empty()))
     {
         m_stateStack.pop();
 
@@ -58,4 +72,9 @@ void Engine::StateMan::ProcessStateChange()
 std::unique_ptr<Engine::State> &Engine::StateMan::GetCurrent()
 {
     return m_stateStack.top();
+}
+
+bool Engine::StateMan::IsEmpty() const
+{
+    return m_stateStack.empty();
 }

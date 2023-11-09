@@ -101,7 +101,7 @@ void MainMenu::ProcessInput()
     }
 }
 
-void MainMenu::Update(const sf::Time& deltaTime)
+void MainMenu::Update(const sf::Time &deltaTime)
 {
     if (m_isPlayButtonSelected)
     {
@@ -120,7 +120,7 @@ void MainMenu::Update(const sf::Time& deltaTime)
     }
     else if (m_isExitButtonPressed)
     {
-        m_context->m_window->close();
+        m_context->m_states->PopAll();
     }
 }
 

@@ -99,7 +99,7 @@ void GameOver::ProcessInput()
     }
 }
 
-void GameOver::Update(const sf::Time& deltaTime)
+void GameOver::Update(const sf::Time &deltaTime)
 {
     if (m_isRetryButtonSelected)
     {
@@ -118,7 +118,7 @@ void GameOver::Update(const sf::Time& deltaTime)
     }
     else if (m_isExitButtonPressed)
     {
-        m_context->m_window->close();
+        m_context->m_states->PopAll();
     }
 }
 
