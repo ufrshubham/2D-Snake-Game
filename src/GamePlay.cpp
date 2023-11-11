@@ -65,7 +65,7 @@ void GamePlay::ProcessInput()
     {
         if (event.type == sf::Event::Closed)
         {
-            m_context->m_window->close();
+            m_context->m_states->PopAll();
         }
         else if (event.type == sf::Event::KeyPressed)
         {
